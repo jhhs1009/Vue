@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <div id="app">
+      <input type="text">
+      <button @click="plus">+</button>
+      
+      <div id="1">
+        <ul>
+        </ul>
+      </div>
+      <button @click="clear">완료 목록 삭제</button>
+    </div>
+
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:"#app",
+    data : {
+
+    },
+    methods : {
+      plus(){
+        const txt = document.querySelector('input').value
+        const ul = document.querySelector('ul')
+        const li = document.createElement('li')
+
+        const chk = document.createElement('input')
+        chk.setAttribute("type","checkbox")
+        chk.setAttribute("v-on","click")
+        chk.classList.add('chk')
+
+        console.log(chk)
+
+        const p = document.createElement('span')
+        p.innerText = txt
+
+        li.appendChild(chk)
+        li.appendChild(p)
+
+        ul.appendChild(li)
+      },
+      clear() {
+        // console.log("ddd")
+        const chks = document.querySelectorAll('.chk')
+        chks.forEach(function (chk) {
+          const is_chk = chk.checked
+
+          if (is_chk == true) {
+            chk.parentElement.remove()
+          } 
+        });
+      }
+
+    }
+  })
+
+</script>
+</html>
