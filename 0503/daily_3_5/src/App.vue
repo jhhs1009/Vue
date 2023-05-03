@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <h1>소득세 계산기</h1>
-    <Income></Income>
+
   </div>
 </template>
 
 <script>
-import Income from '@/components/Income.vue'
 
 
 export default {
   name: 'App',
   components: {
-    Income,
+
   }
 }
 </script>
@@ -25,7 +23,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  width: 500px;
-  margin: auto;
 }
 </style>

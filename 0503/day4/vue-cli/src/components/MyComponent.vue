@@ -1,9 +1,14 @@
 <template>
   <div class="border">
-    <h1>This is MyComponent</h1>
-    <MyChild static-props="component(부모)에서 child로"
+    <br><br><br>
+    <h1>AppParent</h1>
+    <input type="text" v-model="parent_data" @keypress="childToParent">
+    <p>appData: {{ app_data }}</p>
+    <p>childData: </p>
+    <MyChild :app_data="app_data" :parent_data="parent_data"></MyChild>
+    <!-- <MyChild static-props="childData: "
     :dynamic-props="dynamicProps" 
-    />
+    /> -->
   </div>
 </template>
 
@@ -12,12 +17,20 @@ import MyChild from '@/components/MyChild'
 
 export default {
   name: 'MyComponent',
+  data: function() {
+        return {
+          parent_data : "" ,
+        }
+    },
   components: {
     MyChild,
   },
-  data : function () {
-    return {
-      dynamicProps : "It is a data."
+  props: {
+    app_data:String,
+  },
+  methods: {
+    childToParent: function() {
+      this.$emit('child-to-parent', parent_data)
     }
   }
 }
@@ -25,7 +38,7 @@ export default {
 </script>
 
 <style>
-  .border {
+  /* .border {
     border: solid;
-  }
+  } */
 </style>

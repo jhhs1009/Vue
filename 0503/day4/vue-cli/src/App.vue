@@ -1,20 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <MyComponent />
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>App</h1>
+    <input type="text" v-model="app_data">
+    <p>parentData: {{ parent_data }}</p>
+    <p>childData: </p>
+    <MyComponent :app_data="app_data" @child-to-parent="parentGetEvent"></MyComponent>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import MyComponent from '@/components/MyComponent'
+
 
 export default {
   name: 'App',
+  data: function() {
+        return {
+            app_data : "" ,
+            parent_data : ""
+        }
+    },
+  methods: {
+    parentGetEvent: function(inputData){
+      {{inputData}}
+    }
+
+  },
   components: {
-    HelloWorld,
     MyComponent,
+
+  },
+  props :{
+    parent_data:String
   }
 }
 </script>
