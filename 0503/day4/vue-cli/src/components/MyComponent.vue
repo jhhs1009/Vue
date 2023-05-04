@@ -2,10 +2,10 @@
   <div class="border">
     <br><br><br>
     <h1>AppParent</h1>
-    <input type="text" v-model="parent_data" @keypress="childToParent">
+    <input type="text" v-model="parent_data" @input="ParentToApp">
     <p>appData: {{ app_data }}</p>
-    <p>childData: </p>
-    <MyChild :app_data="app_data" :parent_data="parent_data"></MyChild>
+    <p>childData: {{ get_child_data }}</p>
+    <MyChild :app_data="app_data" :parent_data="parent_data" @child-to-parent="get_child"></MyChild>
     <!-- <MyChild static-props="childData: "
     :dynamic-props="dynamicProps" 
     /> -->
@@ -20,6 +20,7 @@ export default {
   data: function() {
         return {
           parent_data : "" ,
+          get_child_data: ""
         }
     },
   components: {
@@ -29,8 +30,13 @@ export default {
     app_data:String,
   },
   methods: {
-    childToParent: function() {
-      this.$emit('child-to-parent', parent_data)
+    get_child: function(inputData) {
+      this.get_child_data = inputData
+      this.$emit('parent-to-app', this.parent_data, this.get_child_data)
+    },
+
+    ParentToApp: function() {
+      this.$emit('parent-to-app', this.parent_data, this.get_child_data)
     }
   }
 }

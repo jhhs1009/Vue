@@ -2,9 +2,9 @@
   <div id="app">
     <h1>App</h1>
     <input type="text" v-model="app_data">
-    <p>parentData: {{ parent_data }}</p>
-    <p>childData: </p>
-    <MyComponent :app_data="app_data" @child-to-parent="parentGetEvent"></MyComponent>
+    <p>parentData: {{ get_parent_data }}</p>
+    <p>childData: {{ get_child_data }}</p>
+    <MyComponent :app_data="app_data" @parent-to-app="get_parent"></MyComponent>
   </div>
 </template>
 
@@ -17,13 +17,17 @@ export default {
   data: function() {
         return {
             app_data : "" ,
-            parent_data : ""
+            parent_data : "",
+            get_parent_data: "",
+            get_child_data: ""
         }
     },
   methods: {
-    parentGetEvent: function(inputData){
-      {{inputData}}
-    }
+    get_parent: function(inputData, inputData2) {
+      this.get_parent_data = inputData,
+      this.get_child_data = inputData2
+    },
+
 
   },
   components: {
@@ -31,7 +35,7 @@ export default {
 
   },
   props :{
-    parent_data:String
+    // parent_data:String
   }
 }
 </script>

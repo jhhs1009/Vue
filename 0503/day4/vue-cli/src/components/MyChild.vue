@@ -6,7 +6,7 @@
     <button @click="childToParent">클릭</button> -->
     <br><br><br>
     <h1>AppChild</h1>
-    <input type="text" v-model="child_data">
+    <input type="text" v-model="child_data" @input="childToParent">
     <p>appData: {{ app_data }}</p>
     <p>parentData: {{ parent_data }}</p>
     <p>childData: {{ child_data }}</p>
@@ -26,9 +26,9 @@ export default {
     parent_data:String
   },
   methods: {
-    // childToParent: function() {
-    //   this.$emit('child-to-parent')
-    // }
+    childToParent: function() {
+      this.$emit('child-to-parent', this.child_data)
+    }
   }
 }
 </script>
