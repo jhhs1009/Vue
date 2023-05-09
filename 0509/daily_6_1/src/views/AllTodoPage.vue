@@ -9,16 +9,19 @@
 
         </div>
         <hr>
-        <div class="a" v-for="e in list" :key=e.id>
-            <div class="t">
-                <input type="checkbox" class="checkbox" id="myCheckbox">
-                <label for="myCheckbox"></label>
+        <div v-for="e in list" :key=e.id>
+            <div class="a">
+                <div class="t">
+                    <input type="checkbox" class="checkbox" id="myCheckbox">
+                    <label for="myCheckbox"></label>
 
-                {{ e.content }}
+                    {{ e.content }}
+                </div>
+            
+                <button :class="{important:e.isImportant}" @click="important" id="star" >★</button>
             </div>
-        
-            <button :class="{important:e.isImportant}" @click="important" id="star" >★</button>
         </div>
+        
     </div>
 
         
