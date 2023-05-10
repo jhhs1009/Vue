@@ -5,9 +5,14 @@
         </div>
         <hr><br>
         <div>
-            <p><textarea class="text_box" placeholder="메모를 입력하세요" cols="30" rows="10"></textarea></p>
-            <input type="submit" value="submit" class="sub" @click="submit" v-model="data">
+            <!-- 타이틀 -->
+            <span style="float: left; margin-left: 4.6%;">Title: <input type="text" v-model="title"></span>
+            <br>
+
+            <p><textarea class="text_box" placeholder="메모를 입력하세요" cols="30" rows="10" v-model="data"></textarea></p>
+            <input type="submit" value="submit" class="sub" @click="submit">
             <button @click="back" style="float: right; margin-right:1%">back</button>
+            
         </div>
     </div>
 </template>
@@ -17,13 +22,20 @@ export default {
     name: 'AddPage',
     data() {
         return {
-            data:''
+            data:'',
+            title:''
         }
     },
     methods: {
         submit() {
-
-            this.$router.push({name:'home'})
+            if (this.title && this.data){
+                alert('메모를 저장하였습니다.')
+                this.$store.dispatch('data', [this.data, this.title]);
+                this.$router.push({name:'home'})
+            } else {
+                alert('제목과 내용이 있어야 합니다.')
+            }
+            
         },
         back() {
             this.$router.push({name:'home'})
