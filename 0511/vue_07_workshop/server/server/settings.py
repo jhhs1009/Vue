@@ -149,7 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:8000"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:8080"]
 
 REST_AUTH = {
     'SESSION_LOGIN' : False,
