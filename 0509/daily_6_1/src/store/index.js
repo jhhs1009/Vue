@@ -17,11 +17,23 @@ const store = new Vuex.Store({
         isCompleted: false,               
         isImportant: false,
       })
+    },
+    important(state,data) {
+      state.TodoData.list = state.TodoData.list.map((li) => {
+        if (li.content == data.content) {
+          li.isImportant = !data.isImportant
+        }
+        return li
+      })
+      
     }
   },
   actions: {
     update(context, data) {
       context.commit('data', data)
+    },
+    important(context, data) {
+      context.commit('important', data)
     }
   }
 })

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # local apps
     'todos',
     'accounts',
+    'articles',
     
     #cors policy
     'corsheaders',

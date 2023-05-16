@@ -13,7 +13,8 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    token : null
+    token : null,
+    articles : null
   },
   getters: {
     isLogin(state) {
@@ -27,7 +28,10 @@ export default new Vuex.Store({
     SAVE_TOKEN (state, token) {
       state.token = token
       router.push({name: 'home'})
-    }
+    },
+    GET_ARTICLES(state, articles) {
+      state.articles = articles
+    },
   },
   actions: {
     signUp(context, payload) {
@@ -62,7 +66,23 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.access)
         })
         .catch(err => console.log(err))
-    }
+    },
+    getArticles(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/articles/`,
+        headers: {
+          Ahthorizations: `Bearer ${context.state.token}` 
+        }
+      })
+        .then((res) => {
+        // console.log(res, context)
+          context.commit('GET_ARTICLES', res.data)
+        })
+        .catch((err) => {
+        console.log(err)
+      })
+    },
   },
   
   modules: {

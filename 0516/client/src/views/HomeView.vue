@@ -1,17 +1,40 @@
 <template>
-  <div class="home">
-    <h1>HOME</h1>
-
+  <div>
+    <h1>Article Page</h1>
+    <ArticleList />
+    <hr>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import ArticleList from '@/components/ArticleList.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'ArticleView',
   components: {
-
+    ArticleList,
+  },
+  computed:{
+    isLogin() {
+      return this.$store.getters.isLogin 
+    }
+  },
+  created() {
+    this.getArticles()
+  },
+  methods: {
+    getArticles() {
+      if (this.isLogin) {
+        this.$store.dispatch('getArticles')
+      } else {
+        alert('로그인이 필요한 페이지 입니다.')
+        this.$router.push({name:'LogInView'})
+      }
+    }
   }
 }
 </script>
+
+<style>
+
+</style>

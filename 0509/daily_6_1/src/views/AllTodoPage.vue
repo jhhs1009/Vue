@@ -9,18 +9,14 @@
 
         </div>
         <hr>
-        <div v-for="e in list" :key=e.id>
-            <div class="a">
-                <div class="t">
-                    <input type="checkbox" class="checkbox" id="myCheckbox">
-                    <label for="myCheckbox"></label>
 
-                    {{ e.content }}
-                </div>
-            
-                <button :class="{important:e.isImportant}" @click="important" id="star" >★</button>
-            </div>
-        </div>
+        <!-- for 문 밖에서 다시 돌기 -->
+        <ImportantItemVue
+            v-for="item in list"
+            :key="item.id"
+            :data="item"
+        ></ImportantItemVue>
+
         
     </div>
 
@@ -29,10 +25,15 @@
 </template>
 
 <script>
+import ImportantItemVue from '@/components/ImportantItem.vue';
+// import item
 
 
 export default {
     name:'AllTodo',
+    components : {
+        ImportantItemVue,
+    },
     computed: {
         list() {
             return this.$store.state.TodoData.list
@@ -41,18 +42,9 @@ export default {
     methods:{
         update(e){
             e.preventDefault();
-            console.log(this.text_data)
             this.$store.dispatch("update", this.text_data);
             console.log(this.$store.state.TodoData.list)
         },
-        important(event) {
-            event.preventDefault();
-            const d = document.querySelector("#star")
-            console.log(d)
-            console.log(this.$store.state.TodoData.list)
-            
-        }
-
     }
 
     
